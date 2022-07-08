@@ -142,13 +142,13 @@ class SinglyLinkedList {
 }
 
 // Doubly Linked List Node
-class Node {
-  constructor(val) {
-    this.val = val;
-    this.next = null;
-    this.prev = null;
-  }
-}
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.next = null;
+//     this.prev = null;
+//   }
+// }
 class DoubleLinkedList {
   constructor() {
     this.head = null;
@@ -226,13 +226,137 @@ class DoubleLinkedList {
     this.length++;
     return this;
   }
+  get(index) {
+    if (index < 0 || index >= this.length) return null;
+    let currentNode;
+    if (index < Math.floor(this.length / 2)) {
+      currentNode = this.head;
+      for (let i = 0; i < index; i++) {
+        currentNode = currentNode.next;
+      }
+    } else {
+      currentNode = this.tail;
+      for (let i = this.length - 1; i > index; i--) {
+        currentNode = currentNode.prev;
+      }
+    }
+    return currentNode;
+  }
+  set(val, index) {
+    let node = this.get(index);
+    if (node) {
+      node.val = val;
+      return true;
+    }
+    return false;
+  }
+  insert(val,index){
+    if(index > this.length || index < 0) return false
+    if(index === 0) return !!this.unshift(val)
+    if(index === this.length) return this.push(val)
+    let newNode = new Node(val)
+    let pvNode = this.get(index-1)
+    newNode.next = pvNode.next
+    pvNode.next.prev = newNode
+    pvNode.next = newNode
+    newNode.prev = pvNode
+    this.length++
+    return true
+  }
+  remove(index){
+    if(index >= this.length || index < 0 ) return undefined;
+    if(index === 0) return this.shift()
+    if(index === this.length-1) return this.pop()
+    let removedNode = this.get(index)
+    let pvNode = removedNode.prev
+    let nextNode = removedNode.next
+    pvNode.next = nextNode
+    nextNode.prev = pvNode
+    removedNode.next = null, removedNode.prev = null
+    this.length--;  
+    return removedNode
+
+  }
+}
+
+class Node{
+  constructor(val){
+    this.val = val
+    this.next = null
+  }
+}
+
+class Stack{
+  constructor(){
+    this.first = null
+    this.last = null
+    this.size = 0
+  }
+
+  push(val){
+    // Udemy Solution
+    let newNode = new Node(val)
+    if(!this.first){
+      this.first = newNode
+      this.last = newNode
+    }else{
+      let temp = this.first
+      this.first = newNode
+      this.first.next = temp
+    }
+    return ++this.size
+
+    // My solution
+    // let newNode = new Node(val)
+    // if(this.size === 0){
+    //   this.first = newNode
+    //   this.last = newNode
+    // }else{
+    //   let oldFirst = this.first
+    //   newNode.next = oldFirst
+    //   this.first = newNode
+    // }
+    // this.size++
+    // return this.size
+  }
+
+  pop(){
+
+    // Udemy Solution
+    if(!this.first) return null
+    let temp = this.first
+    if(this.first === this.last){
+      this.last = null
+    }
+    this.first = this.first.next
+    this.size--
+    return temp.val 
+
+
+    // My solution
+    // if(this.size === 0) return null
+    // let first = this.first
+    // if(this.size === 1){
+    //   this.first = null
+    //   this.last = null
+    // }else{
+    //   this.first = first.next
+    //   first.next = null
+    // }
+    // this.size--
+    // return first
+  }
 }
 
 let Dlist = new DoubleLinkedList();
 Dlist.unshift(1);
 Dlist.unshift(2);
 Dlist.unshift(3);
-console.log(Dlist.head.next);
+Dlist.unshift(4);
+Dlist.unshift(5);
+Dlist.unshift(6);
+Dlist.insert(99,2)
+console.log(Dlist.get(2));
 // Dlist.pop()
 // console.log(Dlist)
 
