@@ -280,12 +280,12 @@ class DoubleLinkedList {
 }
 
 // Stack and Queue Node
-class Node{
-  constructor(val){
-    this.val = val
-    this.next = null
-  }
-}
+// class Node{
+//   constructor(val){
+//     this.val = val
+//     this.next = null
+//   }
+// }
 
 class Stack{
   constructor(){
@@ -380,25 +380,49 @@ class Queue{
     this.size--
     return temp
   }
-
 }
 
-let Dlist = new DoubleLinkedList();
-Dlist.unshift(1);
-Dlist.unshift(2);
-Dlist.unshift(3);
-Dlist.unshift(4);
-Dlist.unshift(5);
-Dlist.unshift(6);
-Dlist.insert(99,2)
-console.log(Dlist.get(2));
+class Node{
+  constructor(val){
+    this.val = val
+    this.left = null
+    this.right = null
+  }
+}
+class BinarySearchTree{
+  constructor(){
+    this.root = null
+  }
+}
+
+let tree = new BinarySearchTree()
+tree.root = new Node(10)
+
+
+
+
+
+
+// let Dlist = new DoubleLinkedList();
+// Dlist.unshift(1);
+// Dlist.unshift(2);
+// Dlist.unshift(3);
+// Dlist.unshift(4);
+// Dlist.unshift(5);
+// Dlist.unshift(6);
+// Dlist.insert(99,2)
+// console.log(Dlist.get(2));
 // Dlist.pop()
 // console.log(Dlist)
 
-let list = new SinglyLinkedList();
-list.push("Hello");
-list.push("World");
-list.push("!");
-console.log(list.reverse());
+// let list = new SinglyLinkedList();
+// list.push("Hello");
+
+// list.push("World");
+// list.push("!");
+// console.log(list.reverse());
 // console.log(list.set("people", 1));
 // console.log(list.get(1));
+
+
+
