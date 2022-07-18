@@ -250,32 +250,31 @@ class DoubleLinkedList {
     }
     return false;
   }
-  insert(val,index){
-    if(index > this.length || index < 0) return false
-    if(index === 0) return !!this.unshift(val)
-    if(index === this.length) return this.push(val)
-    let newNode = new Node(val)
-    let pvNode = this.get(index-1)
-    newNode.next = pvNode.next
-    pvNode.next.prev = newNode
-    pvNode.next = newNode
-    newNode.prev = pvNode
-    this.length++
-    return true
+  insert(val, index) {
+    if (index > this.length || index < 0) return false;
+    if (index === 0) return !!this.unshift(val);
+    if (index === this.length) return this.push(val);
+    let newNode = new Node(val);
+    let pvNode = this.get(index - 1);
+    newNode.next = pvNode.next;
+    pvNode.next.prev = newNode;
+    pvNode.next = newNode;
+    newNode.prev = pvNode;
+    this.length++;
+    return true;
   }
-  remove(index){
-    if(index >= this.length || index < 0 ) return undefined;
-    if(index === 0) return this.shift()
-    if(index === this.length-1) return this.pop()
-    let removedNode = this.get(index)
-    let pvNode = removedNode.prev
-    let nextNode = removedNode.next
-    pvNode.next = nextNode
-    nextNode.prev = pvNode
-    removedNode.next = null, removedNode.prev = null
-    this.length--;  
-    return removedNode
-
+  remove(index) {
+    if (index >= this.length || index < 0) return undefined;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+    let removedNode = this.get(index);
+    let pvNode = removedNode.prev;
+    let nextNode = removedNode.next;
+    pvNode.next = nextNode;
+    nextNode.prev = pvNode;
+    (removedNode.next = null), (removedNode.prev = null);
+    this.length--;
+    return removedNode;
   }
 }
 
@@ -287,25 +286,25 @@ class DoubleLinkedList {
 //   }
 // }
 
-class Stack{
-  constructor(){
-    this.first = null
-    this.last = null
-    this.size = 0
+class Stack {
+  constructor() {
+    this.first = null;
+    this.last = null;
+    this.size = 0;
   }
 
-  push(val){
+  push(val) {
     // Udemy Solution
-    let newNode = new Node(val)
-    if(!this.first){
-      this.first = newNode
-      this.last = newNode
-    }else{
-      let temp = this.first
-      this.first = newNode
-      this.first.next = temp
+    let newNode = new Node(val);
+    if (!this.first) {
+      this.first = newNode;
+      this.last = newNode;
+    } else {
+      let temp = this.first;
+      this.first = newNode;
+      this.first.next = temp;
     }
-    return ++this.size
+    return ++this.size;
 
     // My solution
     // let newNode = new Node(val)
@@ -321,18 +320,16 @@ class Stack{
     // return this.size
   }
 
-  pop(){
-
+  pop() {
     // Udemy Solution
-    if(!this.first) return null
-    let temp = this.first
-    if(this.first === this.last){
-      this.last = null
+    if (!this.first) return null;
+    let temp = this.first;
+    if (this.first === this.last) {
+      this.last = null;
     }
-    this.first = this.first.next
-    this.size--
-    return temp.val 
-
+    this.first = this.first.next;
+    this.size--;
+    return temp.val;
 
     // My solution
     // if(this.size === 0) return null
@@ -349,59 +346,138 @@ class Stack{
   }
 }
 
-class Queue{
-  constructor(){
-    this.first = null
-    thus.last = null
-    this.size = 0
+class Queue {
+  constructor() {
+    this.first = null;
+    thus.last = null;
+    this.size = 0;
   }
-  enqueue(val){
-    let newNode = new Node(val)
-    if(this.size === 0){
-      this.first = newNode
-      this.last = newNode
-    }else{
-      this.last.next = newNode
-      this.last = newNode
+  enqueue(val) {
+    let newNode = new Node(val);
+    if (this.size === 0) {
+      this.first = newNode;
+      this.last = newNode;
+    } else {
+      this.last.next = newNode;
+      this.last = newNode;
     }
-    return ++this.size
+    return ++this.size;
   }
 
-  dequeue(){
-    if(this.size === 0) return  null
-    let temp = this.first
-    if(this.size === 1){
-      this.first = null
-      this.last = null
-    }else{
-      this.first = temp.next
-      temp.next = null
+  dequeue() {
+    if (this.size === 0) return null;
+    let temp = this.first;
+    if (this.size === 1) {
+      this.first = null;
+      this.last = null;
+    } else {
+      this.first = temp.next;
+      temp.next = null;
     }
-    this.size--
-    return temp
+    this.size--;
+    return temp;
   }
 }
 
-class Node{
-  constructor(val){
-    this.val = val
-    this.left = null
-    this.right = null
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
   }
 }
-class BinarySearchTree{
-  constructor(){
-    this.root = null
+class BinarySearchTree {
+  constructor() {
+    this.root = null;
+  }
+
+  insert(val) {
+    let newNode = new Node(val);
+    if (this.root === null) {
+      this.root = newNode;
+      return this;
+    }
+    let current = this.root;
+    while (true) {
+      if (val === current.val) return undefined;
+      if (val < current.val) {
+        if (current.left === null) {
+          current.left = newNode;
+          return this;
+        } else {
+          current = current.left;
+        }
+      } else if (val > current.val) {
+        if (current.right === null) {
+          current.right = newNode;
+          return this;
+        } else {
+          current = current.right;
+        }
+      }
+    }
+  }
+  find(val) {
+    if (this.root === null) return false;
+    let current = this.root;
+    while (true) {
+      console.log(current);
+      if (current.val === val) return true;
+      if (val < current.val) {
+        if (current.left === null) return false;
+        current = current.left;
+      } else {
+        if (current.right === null) return false;
+        current = current.right;
+      }
+    }
+  }
+  BFS() {
+    let node = this.root;
+    let finalData = [];
+    let queue = [];
+    queue.push(node);
+    while (queue.length) {
+      node = queue.shift();
+      finalData.push(node.val);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+    return finalData;
+  }
+  DFSPreorder() {
+    let final = [];
+    let current = this.root;
+    const helper = (node) => {
+      if (!node) return;
+      final.push(node.val);
+      if (node.left) helper(node.left);
+      if (node.right) helper(node.right);
+    };
+    helper(current);
+    return final;
+  }
+  DFSPostOrder(){
+    let data = []
+    let current = this.root
+    const helper = (node) => {
+      if(node.left) helper(node.left)
+      if(node.right) helper(node.right)
+      data.push(node.val)
+    }
+    helper(current)
+    return data
   }
 }
 
-let tree = new BinarySearchTree()
-tree.root = new Node(10)
-
-
-
-
-
+let tree = new BinarySearchTree();
+tree.insert(10);
+tree.insert(6);
+tree.insert(15);
+tree.insert(3);
+tree.insert(8);
+tree.insert(20);
+console.log(tree.DFSPostOrder());
 
 // let Dlist = new DoubleLinkedList();
 // Dlist.unshift(1);
@@ -423,6 +499,3 @@ tree.root = new Node(10)
 // console.log(list.reverse());
 // console.log(list.set("people", 1));
 // console.log(list.get(1));
-
-
-
