@@ -457,27 +457,51 @@ class BinarySearchTree {
     helper(current);
     return final;
   }
-  DFSPostOrder(){
-    let data = []
-    let current = this.root
+  DFSPostOrder() {
+    let data = [];
+    let current = this.root;
     const helper = (node) => {
-      if(node.left) helper(node.left)
-      if(node.right) helper(node.right)
-      data.push(node.val)
-    }
-    helper(current)
-    return data
+      if (node.left) helper(node.left);
+      if (node.right) helper(node.right);
+      data.push(node.val);
+    };
+    helper(current);
+    return data;
   }
 }
 
-let tree = new BinarySearchTree();
-tree.insert(10);
-tree.insert(6);
-tree.insert(15);
-tree.insert(3);
-tree.insert(8);
-tree.insert(20);
-console.log(tree.DFSPostOrder());
+class MaxBinaryHeap {
+  constructor() {
+    this.values = [];
+  }
+  insert(element) {
+    this.values.push(element);
+    this.bubbleUp();
+  }
+  bubbleUp() {
+    let indx = this.values.length - 1;
+    const element = this.values[indx];
+    while (indx > 0) {
+      let parentIdx = Math.floor((indx - 2) / 2);
+      let parent = this.values[parentIdx];
+      if (element <= parent) break;
+      this.values[indx] = parent;
+      this.values[parentIdx] = element;
+      indx = parentIdx;
+    }
+  }
+}
+// let heap = new MaxBinaryHeap()
+// heap.insert(55)
+
+// let tree = new BinarySearchTree();
+// tree.insert(10);
+// tree.insert(6);
+// tree.insert(15);
+// tree.insert(3);
+// tree.insert(8);
+// tree.insert(20);
+// console.log(tree.BFS());
 
 // let Dlist = new DoubleLinkedList();
 // Dlist.unshift(1);
@@ -499,3 +523,7 @@ console.log(tree.DFSPostOrder());
 // console.log(list.reverse());
 // console.log(list.set("people", 1));
 // console.log(list.get(1));
+
+let str = "hello world";
+str = str.padStart(15);
+console.log(str + "i");

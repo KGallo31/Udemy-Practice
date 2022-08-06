@@ -181,3 +181,60 @@ const quickSort = (arr, left = 0, right = arr.length - 1) => {
   return arr;
 };
 console.log(quickSort([4, 2, 1, 8, 5, 7, 6, 3]));
+
+
+
+
+
+/**
+ * @param {number[][]} moves
+ * @return {string}
+ */
+ var tictactoe = function(moves) {
+  if(moves.length < 5) return "Pending"
+//     Make grid
+  let isGameOver = false
+  let grid = [Array(3),Array(3),Array(3)]
+  for(let i = 0;i<moves.length;i++){
+      if(i % 2 === 0){
+          grid[moves[i][0]][moves[i][1]] = checkPlayer(i)
+      }else{
+          grid[moves[i][0]][moves[i][1]] = checkPlayer(i)
+      }
+      if(i >= 4){
+          isGameOver = checkWinner(grid,i)
+          if(isGameOver === 'x') return "A"
+          else if(isGameOver === 'o')return 'B'
+      }
+  }
+  if(moves.length === 9) return "Draw"
+  return "Pending"
+// Iterate over moves array inserting each move into grid
+//     Start checking for winers five moves into moves array
+//     
+};
+
+const checkPlayer = (i) => {
+      if(i % 2 === 0){
+          return 'x'
+      }else{
+          return 'o'
+      }
+}
+
+const checkWinner = (grid,i) => {
+//     switch case/if statement checking every possiable winnable solution 
+  if((grid[0][0] === 'x' && grid[0][1] === 'x' && grid[0][2] === 'x') || (grid[0][0] === 'o' && grid[0][1] === 'o' && grid[0][2] === 'o')){ return checkPlayer(i)
+  }else if((grid[1][0] === 'x' && grid[1][1] === 'x' && grid[1][2] === 'x') || (grid[1][0] === 'o' && grid[1][1] === 'o' && grid[1][2] === 'o')){return checkPlayer(i)
+  }else if((grid[2][0] === 'x' && grid[2][1] === 'x' && grid[2][2] === 'x') || (grid[2][0] === 'o' && grid[2][1] === 'o' && grid[2][2] === 'o')){return checkPlayer(i)
+  }else if((grid[0][0] === 'x' && grid[1][0] === 'x' && grid[2][0] === 'x') || (grid[0][0] === 'o' && grid[1][0] === 'o' && grid[2][0] === 'o')){return checkPlayer(i)
+  }else if((grid[0][1] === 'x' && grid[1][1] === 'x' && grid[2][1] === 'x') || (grid[0][1] === 'o' && grid[1][1] === 'o' && grid[2][1] === 'o')){return checkPlayer(i)
+  }else if((grid[0][2] === 'x' && grid[1][2] === 'x' && grid[2][2] === 'x') || (grid[0][2] === 'o' && grid[1][2] === 'o' && grid[2][2] === 'o')){return checkPlayer(i)
+  }else if((grid[0][0] === 'x' && grid[1][1] === 'x' && grid[2][2] === 'x') || (grid[0][0] === 'o' && grid[1][1] === 'o' && grid[2][2] === 'o')){return checkPlayer(i)
+  }else if((grid[0][2] === 'x' && grid[1][1] === 'x' && grid[2][0] === 'x') || (grid[0][2] === 'o' && grid[1][1] === 'o' && grid[2][0] === 'o')){return checkPlayer(i)
+  }
+}
+
+
+
+
