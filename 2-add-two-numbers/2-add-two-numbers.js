@@ -37,12 +37,8 @@ var addTwoNumbers = function(l1, l2) {
     }
     strL1 = reverse(strL1)
     strL2 = reverse(strL2)
-    // console.log(strL1)
-    // console.log(BigInt(strL1))
     let num1 = BigInt(strL1)
     let num2 = BigInt(strL2)
-    // let num1 = parseInt(strL1)
-    // let num2 = parseInt(strL2)
     let sum = ((num1 + num2)).toString()
     console.log(sum)
     sum = reverse(sum)
