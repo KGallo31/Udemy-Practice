@@ -40,7 +40,6 @@ var addTwoNumbers = function(l1, l2) {
     let num1 = BigInt(strL1)
     let num2 = BigInt(strL2)
     let sum = ((num1 + num2)).toString()
-    console.log(sum)
     sum = reverse(sum)
     let dummy = new ListNode(1)
     let newHead = dummy
