@@ -10,7 +10,6 @@
  * @return {boolean}
  */
 var isPalindrome = function(head) {
-    
     let arr = []
     let currentNode = head
     while(currentNode){
