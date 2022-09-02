@@ -25,7 +25,6 @@ var isSameTree = function(p, q) {
     dfs(q,arr2)
     if(arr1.length !== arr2.length) return false
     for(let i = 0;i<arr1.length;i++){
-        console.log(`arr1: ${arr1[i]}, arr2: ${arr2[i]}`)
         if(arr1[i] !== arr2[i]) return false
     }
     return true
